@@ -1,13 +1,15 @@
 import winston from 'winston';
 import path from 'path';
 
+const currentDir = import.meta.dirname;
+
 const logger = winston.createLogger({
   level: 'info',
   format: winston.format.json(),
   defaultMeta: { service: 'user-service' },
   transports: [
-    new winston.transports.File({ filename: path.join(__dirname, '..', 'storage', 'error.log'), level: 'error' }),
-    new winston.transports.File({ filename: path.join(__dirname, '..', 'storage', 'combined.log') }),
+    new winston.transports.File({ filename: path.join(currentDir, '..', 'storage', 'error.log'), level: 'error' }),
+    new winston.transports.File({ filename: path.join(currentDir, '..', 'storage', 'combined.log') }),
   ],
 });
 
