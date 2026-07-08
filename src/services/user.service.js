@@ -94,6 +94,7 @@ async loginUser({ email, password }) {
   const token = createToken({
     id: user.id,
     email: user.email,
+    perfil: user.perfil
   });
 
   return { user, token };
