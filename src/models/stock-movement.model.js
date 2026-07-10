@@ -1,29 +1,29 @@
 import mongoose, { Types } from 'mongoose';
 
-const movimentacaoSchema = new mongoose.Schema({
-  product_id: { 
+const stockMovementSchema = new mongoose.Schema({
+  productId: { 
     type: Types.ObjectId,
     required: true,
     ref: 'Product',
   },
-  user_id: { 
+  userId: { 
     type: Types.ObjectId,
     required: true,
     ref: 'User',
   },
-  tipo: { 
+  type: { 
     type: String,
-    enum: ['ENTRADA', 'SAIDA'],
+    enum: ['IN', 'OUT'],
     required: true,
     uppercase: true,
     trim: true,
   },
-  quantidade: {
+  quantity: {
     type: Number,
     required: true,
   },
 }, { timestamps: true });
 
-const Movimentacao = mongoose.model('Movimentacao', movimentacaoSchema);
+const StockMovement = mongoose.model('StockMovement', stockMovementSchema);
 
-export default Movimentacao;
+export default StockMovement;

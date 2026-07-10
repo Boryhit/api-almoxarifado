@@ -14,13 +14,13 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  category: [{ 
+  categories: [{ 
     type: String,
     required: true,
     trim: true,
     lowercase: true,
   }],
-  saldo: {
+  stock: {
     type: Number,
     required: true,
     default: 0,

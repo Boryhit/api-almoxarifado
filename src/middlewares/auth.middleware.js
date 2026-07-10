@@ -1,8 +1,7 @@
 import jwt from 'jsonwebtoken';
 import createError from '../utils/app-error.js';
 
-export function authMiddleware() {
-  return (req, _res, next) => {
+export function authMiddleware(req, res, next) {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
       throw createError('Token não informado.', 401);
@@ -22,7 +21,7 @@ export function authMiddleware() {
       throw createError('Token inválido ou expirado.', 401);
     }
   };
-}
+
 
 export function requireRole(...allowedRoles) {
   return (req, _res, next) => {

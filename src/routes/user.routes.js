@@ -1,14 +1,14 @@
 import { Router } from 'express';
 import userController from '../controllers/user.controller.js';
 import { ensureValidId } from '../middlewares/validate.middleware.js';
+import { requireRole } from '../middlewares/auth.middleware.js';
 
 const router = Router();
 
-router.post('/users/auth/register', userController.create);
-router.get('/users', userController.list);
-router.post('/users/auth/login', userController.login);
-router.get('/users/:id', ensureValidId, userController.get);
-router.put('/users/:id', ensureValidId, userController.update);
-router.delete('/users/:id', ensureValidId, userController.remove);
+router.post('/users', userController.create);
+router.get('/users', requireRole('ADMIN', 'READER'), userController.list);
+router.get('/users/:id', requireRole('ADMIN', 'READER'), ensureValidId, userController.get);
+router.put('/users/:id', requireRole('ADMIN'), ensureValidId, userController.update);
+router.delete('/users/:id', requireRole('ADMIN'), ensureValidId, userController.remove);
 
 export default router;
